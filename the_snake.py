@@ -1,4 +1,4 @@
-[29.04.2026 21:51] Sasha: from random import choice, randint
+from random import choice, randint
 
 import pygame
 
@@ -33,7 +33,7 @@ clock = pygame.time.Clock()
 class GameObject:
     """Базовый класс для всех игровых объектов."""
 
-    def init(self, position=None, body_color=None):
+    def __init__(self, position=None, body_color=None):
         """Инициализация базового игрового объекта."""
         if position is None:
             self.position = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
@@ -49,9 +49,9 @@ class GameObject:
 class Apple(GameObject):
     """Класс, описывающий яблоко."""
 
-    def init(self):
+    def __init__(self):
         """Инициализация яблока со случайной позицией."""
-        super().init(body_color=APPLE_COLOR)
+        super().__init__(body_color=APPLE_COLOR)
         self.randomize_position()
 
     def randomize_position(self):
@@ -76,9 +76,9 @@ class Apple(GameObject):
 class Snake(GameObject):
     """Класс, описывающий змейку."""
 
-    def init(self):
+    def __init__(self):
         """Инициализация начального состояния змейки."""
-        super().init(body_color=SNAKE_COLOR)
+        super().__init__(body_color=SNAKE_COLOR)
         self.reset()
 
     def update_direction(self):
@@ -133,7 +133,8 @@ class Snake(GameObject):
         if self.last:
             last_rect = pygame.Rect(self.last, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(surface, BOARD_BACKGROUND_COLOR, last_rect)
-[29.04.2026 21:51] Sasha: def get_head_position(self):
+
+    def get_head_position(self):
         """Возвращает позицию головы змейки."""
         return self.positions[0]
 
@@ -196,5 +197,6 @@ def main():
         pygame.display.update()
 
 
-if name == 'main':
-    main()
+if __name__ == '__main__':
+    main()  
+    
